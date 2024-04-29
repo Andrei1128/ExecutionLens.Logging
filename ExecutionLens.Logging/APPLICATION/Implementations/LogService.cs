@@ -1,6 +1,5 @@
 ﻿using ExecutionLens.Logging.APPLICATION.Contracts;
 using ExecutionLens.Logging.DOMAIN.Models;
-using ExecutionLens.Logging.PERSISTANCE.Contracts;
 
 namespace ExecutionLens.Logging.APPLICATION.Implementations;
 
@@ -59,5 +58,5 @@ internal class LogService(ILogRepository _logRepository) : ILogService
         }
     }
 
-    public async Task<string> Write() => await _logRepository.Add(Root!);
+    public async Task<string> Write() => await _logRepository.Insert(Root!);
 }

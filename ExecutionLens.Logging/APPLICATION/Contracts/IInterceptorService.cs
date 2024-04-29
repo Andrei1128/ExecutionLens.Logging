@@ -2,6 +2,4 @@
 
 namespace ExecutionLens.Logging.APPLICATION.Contracts;
 
-internal interface IInterceptorService : IInterceptor
-{
-}
+internal interface IInterceptorService : IInterceptor{ }
