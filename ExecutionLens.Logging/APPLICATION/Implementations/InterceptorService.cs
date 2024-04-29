@@ -1,7 +1,7 @@
 ﻿using Castle.DynamicProxy;
 using ExecutionLens.Logging.APPLICATION.Contracts;
+using ExecutionLens.Logging.APPLICATION.Utilities;
 using ExecutionLens.Logging.DOMAIN.Factories;
-using ExecutionLens.Logging.DOMAIN.Utilities;
 
 namespace ExecutionLens.Logging.APPLICATION.Implementations;
 

@@ -4,7 +4,9 @@ using ExecutionLens.Logging.APPLICATION.Attributes;
 using ExecutionLens.Logging.APPLICATION.Contracts;
 using ExecutionLens.Logging.APPLICATION.Implementations;
 using ExecutionLens.Logging.DOMAIN.Configurations;
-using ExecutionLens.Logging.DOMAIN.Utilities;
+using ExecutionLens.Logging.APPLICATION.Utilities;
+using Nest;
+using Microsoft.Extensions.Options;
 
 namespace ExecutionLens.Logging;
 
@@ -41,16 +43,28 @@ public static partial class ServiceCollection
         ));
         return services;
     }
-    public static LoggerConfiguration AddLogger(this IServiceCollection services, Action<LoggerConfiguration>? configuration = null)
+    public static LoggerConfiguration AddLogger(this IServiceCollection services, Action<LoggerConfiguration> configuration)
     {
-        services.Configure(configuration ??= defaultConfiguration => { });
-        services.AddScoped<ProxyGenerator>();
+        services.Configure(configuration);
 
-        services.AddScoped<IInterceptorService, InterceptorService>();
-        services.AddScoped<IInformationLogger, InformationLogger>();
-        services.AddScoped<ILogService, LogService>();
+        services.AddSingleton<IElasticClient>(provider =>
+        {
+            var options = provider.GetRequiredService<IOptionsMonitor<LoggerConfiguration>>();
+            var config = options.CurrentValue;
+
+            var settings = new ConnectionSettings(new Uri(config.ElasticUri))
+                               .DefaultIndex(config.Index);
+
+            return new ElasticClient(settings);
+        });
+
+        services.AddScoped<ProxyGenerator>();
         services.AddScoped<LogAttribute>();
         services.AddScoped<LogManager>();
+        services.AddScoped<ILogService, LogService>();
+        services.AddScoped<IInterceptorService, InterceptorService>();
+        services.AddScoped<IInformationLogger, InformationLogger>();
+        services.AddScoped<ILogRepository, ElasticRepository>();
 
         return new LoggerConfiguration();
     }

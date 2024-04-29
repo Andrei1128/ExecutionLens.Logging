@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 using ExecutionLens.Logging.APPLICATION.Contracts;
 using ExecutionLens.Logging.DOMAIN.Configurations;
 using ExecutionLens.Logging.DOMAIN.Factories;
-using ExecutionLens.Logging.DOMAIN.Utilities;
+using ExecutionLens.Logging.APPLICATION.Utilities;
 
 namespace ExecutionLens.Logging.APPLICATION.Attributes;
 

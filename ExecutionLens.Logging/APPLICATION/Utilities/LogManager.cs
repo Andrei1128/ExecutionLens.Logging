@@ -1,4 +1,4 @@
-﻿namespace ExecutionLens.Logging.DOMAIN.Utilities;
+﻿namespace ExecutionLens.Logging.APPLICATION.Utilities;
 
 internal class LogManager
 {
