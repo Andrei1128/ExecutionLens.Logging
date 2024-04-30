@@ -27,7 +27,7 @@ public static partial class ServiceCollection
         where TImplementation : class, TService
     {
         if (!typeof(TService).IsInterface)
-            throw new InvalidOperationException($"'{typeof(TService).Name}' has to be a Interface!");
+            throw new InvalidOperationException($"`{typeof(TService).Name}` has to be a Interface!");
 
         services.Add(new ServiceDescriptor(typeof(TImplementation), typeof(TImplementation), lifetime));
         services.Add(ServiceDescriptor.Describe(
