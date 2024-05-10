@@ -65,6 +65,7 @@ public static partial class ServiceCollection
         services.AddScoped<IInterceptorService, InterceptorService>();
         services.AddScoped<IInformationLogger, InformationLogger>();
         services.AddScoped<ILogRepository, ElasticRepository>();
+        services.AddScoped<IEmailService, EmailService>();
 
         return new LoggerConfiguration();
     }

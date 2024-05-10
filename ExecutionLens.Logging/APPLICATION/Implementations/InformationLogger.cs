@@ -6,7 +6,9 @@ using Microsoft.Extensions.Options;
 
 namespace ExecutionLens.Logging.APPLICATION.Implementations;
 
-internal class InformationLogger(IOptionsMonitor<LoggerConfiguration> config, ILogService _logService) : IInformationLogger
+internal class InformationLogger(IOptionsMonitor<LoggerConfiguration> config,
+                                 ILogService _logService,
+                                 IEmailService _emailService) : IInformationLogger
 {
     private readonly LoggerConfiguration _config = config.CurrentValue;
 
@@ -23,19 +25,20 @@ internal class InformationLogger(IOptionsMonitor<LoggerConfiguration> config, IL
 
             _logService.AddInformation(log);
 
+            if (IsEmailEnabled(logLevel))
+            {
+                Task.Run(async () => await _emailService.SendEmail($"[{logLevel}]", $"{formatter(state, exception)}\n{exception}"));
+            }
+
             if (_config.LogToConsole)
             {
-                Console.WriteLine($"[{logLevel}] {formatter(state, exception)}");
-
-                if (exception is not null)
-                {
-                    Console.WriteLine(exception);
-                }
+                Console.WriteLine($"[{logLevel}] {formatter(state, exception)}\n{exception}");
             }
         }
     }
 
     public bool IsEnabled(LogLevel logLevel) => logLevel >= _config.MinimumLogLevel;
+    public bool IsEmailEnabled(LogLevel logLevel) => logLevel >= _config.MinimumEmailLevel;
 
     public IDisposable BeginScope<TState>(TState state) where TState : notnull => default!;
 }
