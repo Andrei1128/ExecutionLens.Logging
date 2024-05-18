@@ -6,6 +6,8 @@
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Description>A logger used for structured logging of .NET APIs.</Description>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Andrei1128/ExecutionLens.Logging</RepositoryUrl>
   </PropertyGroup>
 
 	<ItemGroup>
