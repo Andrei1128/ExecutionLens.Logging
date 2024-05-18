@@ -1,6 +1,5 @@
 ﻿using Castle.DynamicProxy;
 using Microsoft.Extensions.DependencyInjection;
-using ExecutionLens.Logging.APPLICATION.Attributes;
 using ExecutionLens.Logging.APPLICATION.Contracts;
 using ExecutionLens.Logging.APPLICATION.Implementations;
 using ExecutionLens.Logging.DOMAIN.Configurations;
