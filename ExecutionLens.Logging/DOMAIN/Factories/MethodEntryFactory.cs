@@ -19,9 +19,7 @@ internal class MethodEntryFactory
             input[i] = new Property()
             {
                 Type = invocation.Arguments[i].GetType().Name,
-                Value = invocation.Arguments[i] is string stringValue
-                    ? stringValue
-                    : JsonConvert.SerializeObject(invocation.Arguments[i], Formatting.Indented)
+                Value = JsonConvert.SerializeObject(invocation.Arguments[i], Formatting.Indented)
             };
         }
 
@@ -48,9 +46,7 @@ internal class MethodEntryFactory
             input[i] = new Property()
             {
                 Type = types[i],
-                Value = values[i] is string stringValue
-                    ? stringValue
-                    : JsonConvert.SerializeObject(values[i], Formatting.Indented)
+                Value = JsonConvert.SerializeObject(values[i], Formatting.Indented)
             };
         }
 
