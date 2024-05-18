@@ -6,7 +6,7 @@ using ExecutionLens.Logging.DOMAIN.Configurations;
 using ExecutionLens.Logging.DOMAIN.Factories;
 using ExecutionLens.Logging.APPLICATION.Utilities;
 
-namespace ExecutionLens.Logging.APPLICATION.Attributes;
+namespace ExecutionLens.Logging;
 
 [AttributeUsage(AttributeTargets.Method)]
 internal class LoggerAttribute(
