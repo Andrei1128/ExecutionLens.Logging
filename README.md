@@ -1,4 +1,4 @@
-# API Execution Logger Documentation
+# ExecutionLens Logger Package Documentation
 
 This package provides a logging mechanism for API execution, capturing requests, responses, and method calls in services for structured logging and easier debugging. It supports logging to both ElasticSearch and email notifications based on the severity level.
 
